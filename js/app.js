@@ -1,8 +1,11 @@
 // 这是我们的玩家要躲避的敌人
+ var unitWidth=100;
+ var unitHight=83;
+
 var Enemy = function(y,speed) {
     // 要应用到每个敌人的实例的变量写在这里
     // 我们已经提供了一个来帮助你实现更多
-    this.x=-100;
+    this.x=-unitWidth;
     this.y=70*y;
     this.speed=speed;
 
@@ -19,7 +22,7 @@ Enemy.prototype.update = function(dt) {
     this.x+=(this.speed>100?this.speed:100+this.speed)*dt;
     // 觉得太难可以用这个速度 this.x+=100*dt;
     if(this.x>505){
-      this.x=-100;
+      this.x=-unitWidth;
     }
 
 
@@ -44,6 +47,10 @@ Player.prototype.update = function() {
     this.x=202;
     this.y=400;
     this.move=[0,0];
+    swal(
+      'Good job!',
+      'success'
+    )
   }else if(this.x+this.move[0]>402||this.x+this.move[0]<0){
     this.move=[0,0];
   }else if (this.y+this.move[1]>400) {
@@ -56,7 +63,7 @@ Player.prototype.update = function() {
  }
 
  allEnemies.forEach(function(enemy){
-     if(enemy.x<player.x+100&&enemy.x+100>player.x&&enemy.y<player.y+83&&enemy.y+83>player.y){
+     if(enemy.x<player.x+unitWidth&&enemy.x+unitWidth>player.x&&enemy.y<player.y+unitHight&&enemy.y+unitHight>player.y){
        player.x=202;
        player.y=400;
        player.move=[0,0];
@@ -70,10 +77,10 @@ Player.prototype.update = function() {
 
 Player.prototype.handleInput = function(allowedKeys) {
    switch(allowedKeys){
-     case 'left': this.move=[-100,0]; break;
-     case 'up': this.move=[0,-83];break;
-     case 'right': this.move=[100,0];break;
-     case 'down': this.move=[0,83]; break;
+     case 'left': this.move=[-unitWidth,0]; break;
+     case 'up': this.move=[0,-unitHight];break;
+     case 'right': this.move=[unitWidth,0];break;
+     case 'down': this.move=[0,unitHight]; break;
    }
 };
 
